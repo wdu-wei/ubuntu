@@ -1,0 +1,66 @@
+#avoid flicker
+double_buffer yes
+background yes
+
+#own window to run simultanious 2 or more conkys
+own_window  yes
+own_window_transparent true
+own_window_type desktop
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+
+#borders
+draw_borders no
+border_outer_margin 0
+
+#shades
+draw_shades no
+
+#position
+gap_y 0
+gap_x 0
+#alignment top_left
+alignment top_middle
+
+#behaviour
+update_interval 1
+
+#colour
+default_color ffffff
+color2 D8476A
+color3 929292
+
+#default_shade_color 000000
+own_window_colour 000000
+
+#font
+use_xft yes
+xftfont FreeSans:pixelsize=10
+
+#to prevent window from moving
+use_spacer none
+minimum_size 1440 75
+
+TEXT
+${image ~/.conky/conkyrc_naos.png -p 0,0 }
+${offset 30}${voffset -7}${font FreeSans:size=8:style=bold}${color2}[ ${color}$nodename | $kernel${color2} ]${color}${font}
+${offset 35}${voffset 10}load  ${loadavg 1} ${loadavg 2} ${loadavg 3}
+${offset 35}Uptime      $uptime_short
+
+${offset 240}${voffset -62}CPU
+${offset 240}${voffset 10}Core1  ${color2}[ ${color}${cpu cpu1}${color2} ]${color}
+${offset 240}Core2  ${offset 1}${color2}[ ${color}${cpu cpu2}${color2} ]${color}
+
+${offset 340}${voffset -62}MEMORY
+${offset 340}${voffset 10}Used   ${color2}[ ${color}$mem${color2} ]${color}
+${offset 340}$color3${membar 4,80} $color
+
+${offset 470}${voffset -62}HDD
+${offset 470}${voffset 10}Root     ${color2}[ ${color}${fs_used /}${color2} ]${color} / ${color2}[ ${color}${fs_size /}${color2} ]${color}      Home  ${color2}[ ${color}${fs_used /home/wdu}${color2} ]${color} / ${color2}[ ${color}${fs_size /home/wdu}${color2} ]${color}
+${offset 470}Dev      ${color2}[ ${color}${fs_used /mnt}${color2} ]${color} / ${color2}[ ${color}${fs_size /mnt}${color2} ]${color}      Down  ${color2}[ ${color}${fs_used /home/wdu/下载/download}${color2} ]${color} / ${color2}[ ${color}${fs_size /home/wdu/下载/download}${color2} ]${color}
+
+${offset 800}${voffset -62}NETWORK
+${offset 800}${voffset 10}IP           ${color2}[ ${color}${addr wlan0}${color2} ]${color}      Up      ${color2}[ ${color}${upspeed wlan0}${color2} ]${color}${color2}[ ${color}${totalup wlan0}${color2} ]${color}
+${offset 800}Pub IP    ${color2}[ ${color}${execi 100 ~/.conky/publicip.sh}${color2} ]${color}    Down  ${color2}[ ${color}${downspeed wlan0}${color2} ]${color}${color2}[ ${color}${totaldown wlan0}${color2} ]${color}
+
+${offset 1110}${voffset -65}${font Yahei Mono:size=9:style:bold}${time %A, %e. %B}
+${offset 1110}${voffset 5}${font FreeSans:size=20:style:bold}${time %H}${font Yahei Mono:size=10}${offset 5}${voffset -10}${color2}${time %M}${color} |  

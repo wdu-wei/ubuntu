@@ -1,0 +1,5 @@
+#! /bin/bash
+
+cd /home/wdu/game/Heroes3/Heroes3
+wine Heroes3 -opengl
+

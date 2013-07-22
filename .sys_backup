@@ -1,0 +1,23 @@
+#!/bin/bash
+
+dir=${1%\/*}
+cd $dir 
+NOW=`date '+%Y-%m-%d %H-%M-%S'` 
+#取得压缩包的文件名。只有一个文件时，直接使用文件名。多个文件，取目录名
+[ $# -eq 1 ] && dir=$1;
+
+#取最后一段作文件名前缀
+dir=${dir##\/*\/}
+tar_gz_name="'[${dir}](${NOW}).tar.gz'"
+#处理空格和特殊符号。
+cmd="tar -zcPvf $tar_gz_name"
+
+for i in $*
+do
+	cmd=${cmd}" '${i}'"
+done
+
+#执行
+#rm ~/tmp; echo $cmd>>~/tmp
+eval $cmd
+
